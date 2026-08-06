@@ -75,3 +75,15 @@ complete-shelf/
 ## Design notes
 
 The visual direction studies the clarity, material craft, and book photography of contemporary editorial publishers, including [Stripe Press](https://press.stripe.com/), while using original book titles, cover artwork, textures, layouts, and interaction design. This project is independent and is not affiliated with Stripe Press or the products represented by the seven volumes.
+
+## More open source
+
+- **[Skills](https://github.com/MengTo/Skills)** — agent skills for designers and builders using Codex, Claude, Cursor and other AI coding agents. Browse them at [ui-skills.com](https://ui-skills.com).
+- **[Sketchbook](https://github.com/MengTo/sketchbook)** — a page-flipping sketchbook of Singapore in one static HTML file. [Live](https://mengto.com)
+- **[A Long-Expected Party](https://github.com/MengTo/a-long-expected-party)** — a procedural short film rendered live in the browser, with a Higgsfield-generated score and narration. [Live](https://mengto.github.io/a-long-expected-party/)
+
+## What I build
+
+- **[Aura](https://aura.build)** — an AI website builder that creates landing pages in seconds and exports to HTML and Figma.
+- **[Design+Code](https://designcode.io)** — learn to design and code React and Swift apps.
+- **[DreamCut](https://dreamcut.ai)** — an AI video editor and screen recorder.
