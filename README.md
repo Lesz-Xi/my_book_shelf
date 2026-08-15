@@ -24,13 +24,16 @@ The collection is organized around seven tools for modern creative work:
 - Book-specific color systems that recolor the scene and editorial detail layout.
 - Procedural cloth, foil, paper, page-edge, wood, roughness, normal, and shadow textures.
 - Deterministic shelf-to-detail transitions with exact endpoints so reparenting the selected volume never produces a last-frame jump.
+- A generated ambient score plus distinct cloth, wood, hinge, page-turn, and closing Foley, with persistent mute and volume controls.
 - Accessible HTML controls and status announcements layered over the WebGL scene.
 
 ## How it is made
 
-The entire experience lives in [`index.html`](index.html): markup, responsive layout, shaders and materials, book geometry, interaction state, animation, and embedded image atlases. There is no framework, bundler, backend, analytics layer, Mint dependency, or MCP call in the browser.
+The entire experience lives in [`index.html`](index.html): markup, responsive layout, shaders and materials, book geometry, interaction state, animation, embedded image atlases, and embedded audio. There is no framework, bundler, backend, analytics layer, Mint dependency, or MCP call in the browser.
 
 The render stack uses [Three.js](https://threejs.org/) with physically based materials and `OrbitControls`. Cover and wood artwork are stored as embedded WebP atlases; supporting surface detail is generated at runtime with canvas textures. Each book is assembled from reusable geometry, while the front cover and pages use hinged groups and segmented meshes for curved page-turn motion.
+
+The soundtrack and five interaction cues were generated ahead of time through [Pika API Club](https://dev.pika.art/), trimmed and normalized locally, and embedded as MP3 data URLs. The API key and generation calls never ship to the browser. Audio begins only after a user gesture, pauses while the page is hidden, caps simultaneous voices, and remembers mute and volume preferences.
 
 Interaction is managed as a small state machine:
 
