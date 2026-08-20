@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-20T00:52:00Z",
+  "title": "Design System: Structured Book Shelf",
+  "extensions": {
+    "colorMeta": {
+      "primary-schematic-yellow": {
+        "role": "primary",
+        "displayName": "Schematic Yellow",
+        "canonical": "#b7a15a",
+        "tonalRamp": ["#2d2714", "#544824", "#6f5f28", "#8f7d3e", "#b7a15a", "#d1c186", "#e7ddba", "#f7f2df"]
+      },
+      "accent-yellow-deep": {
+        "role": "accent",
+        "displayName": "Deep Yellow",
+        "canonical": "#6f5f28",
+        "tonalRamp": ["#211c0c", "#3b3215", "#55491f", "#6f5f28", "#927f3b", "#b7a15a", "#d8c993", "#f4edd2"]
+      },
+      "neutral-warm-paper": {
+        "role": "neutral",
+        "displayName": "Warm Mineral Paper",
+        "canonical": "#eae5d7",
+        "tonalRamp": ["#29271f", "#4d493d", "#736e60", "#9e9788", "#c5bfb1", "#eae5d7", "#f3efe5", "#fbfaf5"]
+      },
+      "neutral-sumi-ink": {
+        "role": "neutral",
+        "displayName": "Sumi Ink",
+        "canonical": "#17150f",
+        "tonalRamp": ["#0b0a07", "#17150f", "#2d2a21", "#575247", "#847e70", "#b3ac9e", "#d9d3c7", "#f3efe7"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Editorial Display",
+        "purpose": "First-view promises and terminal statements in two or three natural lines."
+      },
+      "headline": {
+        "displayName": "Folio Headline",
+        "purpose": "Section arguments and volume titles."
+      },
+      "body": {
+        "displayName": "Reading Text",
+        "purpose": "Source-aware explanatory prose with calm leading and narrow measure."
+      },
+      "label": {
+        "displayName": "Evidence Register",
+        "purpose": "Paths, counts, labels, status, navigation, and measurements only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "book-contact",
+        "value": "blur(1.1rem) over a 28% Sumi Ink plane",
+        "purpose": "Physical contact beneath schematic-edition book objects only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "purpose": "Label rolls, ridge ticks, and refined state changes."
+      },
+      {
+        "name": "scroll-weight",
+        "value": "Lenis duration 2.0",
+        "purpose": "Page-wide wheel and trackpad glide; touch and keyboard remain native."
+      },
+      {
+        "name": "statement-reveal",
+        "value": "0.88s expo.out",
+        "purpose": "Masked line arrival for statements, once."
+      },
+      {
+        "name": "quiet-reveal",
+        "value": "0.62s power1.out",
+        "purpose": "Low-amplitude word fade for selected explanatory text, once."
+      },
+      {
+        "name": "entry-aperture",
+        "value": "approximately 1.4s power4.inOut",
+        "purpose": "The single signature entry gesture."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-compact",
+        "value": "520px"
+      },
+      {
+        "name": "single-column",
+        "value": "820px"
+      },
+      {
+        "name": "ridge-visible",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "action-primary",
+      "description": "The single dominant page action with square geometry and bottom-up attention.",
+      "html": "<a class=\"ds-action-primary\" href=\"#\"><span>ENTER THE SHELF</span><b aria-hidden=\"true\">↓</b></a>",
+      "css": ".ds-action-primary{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:space-between;gap:2.5rem;min-width:14.5rem;min-height:3.25rem;padding:0 1rem;overflow:hidden;border:1px solid var(--yellow,#b7a15a);border-radius:0;background:var(--yellow,#b7a15a);color:var(--ink,#17150f);font:500 .6875rem/1 'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;letter-spacing:.09em;text-decoration:none}.ds-action-primary:focus-visible{outline:1px solid currentColor;outline-offset:.35rem}.ds-action-primary:hover{color:var(--paper,#eae5d7);background:var(--ink,#17150f);border-color:var(--ink,#17150f)}.ds-action-primary b{font:inherit}"
+    },
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "description": "A materially quiet secondary action using evidence typography and a growing hairline.",
+      "html": "<a class=\"ds-text-action\" href=\"#\">SEE HOW A BOOK BECOMES A SCHEMATIC</a>",
+      "css": ".ds-text-action{position:relative;display:inline-block;padding-bottom:.35rem;color:var(--ink,#17150f);font:500 .6875rem/1.4 'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;letter-spacing:.065em;text-decoration:none}.ds-text-action:after{position:absolute;right:0;bottom:0;left:0;height:1px;content:'';background:currentColor;opacity:.42;transform:scaleX(.18);transform-origin:left;transition:transform .45s cubic-bezier(.215,.61,.355,1)}.ds-text-action:hover:after,.ds-text-action:focus-visible:after{transform:scaleX(1);opacity:1}"
+    },
+    {
+      "name": "Shelf Mark",
+      "kind": "nav",
+      "description": "Three unequal book planes paired with the product name.",
+      "html": "<span class=\"ds-brand\"><span class=\"ds-mark\" aria-hidden=\"true\"><i></i><i></i><i></i></span><span>Structured Book Shelf</span></span>",
+      "css": ".ds-brand{display:inline-flex;align-items:center;gap:.9rem;color:var(--ink,#17150f);font:400 1rem/1 'Shippori Mincho','Yu Mincho',serif}.ds-mark{display:inline-grid;grid-template-columns:repeat(3,.28rem);align-items:end;gap:.15rem;width:1.14rem;height:1.35rem}.ds-mark i{display:block;width:100%;border:1px solid currentColor;border-bottom-width:2px}.ds-mark i:nth-child(1){height:76%}.ds-mark i:nth-child(2){height:100%}.ds-mark i:nth-child(3){height:58%}"
+    },
+    {
+      "name": "Ridge Tick",
+      "kind": "nav",
+      "description": "A cardless right-edge section marker for desktop folio navigation.",
+      "html": "<a class=\"ds-ridge\" href=\"#\" aria-label=\"AI 2041\"><span></span></a>",
+      "css": ".ds-ridge{display:flex;align-items:center;justify-content:flex-end;width:1.5rem;height:.7rem;color:var(--ink,#17150f)}.ds-ridge span{display:block;width:1rem;height:1px;background:currentColor;opacity:.3;transform:scaleX(.62);transform-origin:right;transition:transform .45s cubic-bezier(.215,.61,.355,1),opacity .3s}.ds-ridge:hover span,.ds-ridge:focus-visible span{opacity:1;transform:scaleX(1)}"
+    },
+    {
+      "name": "Evidence Row",
+      "kind": "custom",
+      "description": "A source fact represented without card chrome.",
+      "html": "<div class=\"ds-evidence\"><span>COVERAGE</span><strong>11 mapped units</strong><em>Introductions + ten paired chapters</em></div>",
+      "css": ".ds-evidence{display:grid;grid-template-columns:1fr 1.25fr 1.6fr;gap:1rem;align-items:baseline;min-height:3.65rem;padding:.95rem 0;border-top:1px solid currentColor;border-bottom:1px solid currentColor;color:var(--ink,#17150f)}.ds-evidence span,.ds-evidence em{font:400 .6rem/1.45 'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;letter-spacing:.055em}.ds-evidence span{opacity:.62}.ds-evidence strong{font:400 1.05rem/1.2 'Shippori Mincho','Yu Mincho',serif}.ds-evidence em{font-style:normal;opacity:.68}"
+    },
+    {
+      "name": "Reader Chapter Link",
+      "kind": "nav",
+      "description": "A chapter location row with number, title, and optional distillation availability.",
+      "html": "<a class=\"ds-chapter-link\" href=\"#\"><span>01</span><strong>The Golden Elephant</strong><em>DISTILLATION</em></a>",
+      "css": ".ds-chapter-link{position:relative;display:grid;grid-template-columns:2rem 1fr;gap:.7rem;min-height:3.8rem;padding:.95rem 1.5rem;border-top:1px solid color-mix(in srgb,var(--ink,#17150f) 19%,transparent);color:var(--ink,#17150f)}.ds-chapter-link:before{position:absolute;inset:0 auto 0 0;width:1px;content:'';background:var(--yellow-deep,#6f5f28)}.ds-chapter-link span,.ds-chapter-link em{font:500 .55rem/1.4 'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;letter-spacing:.09em}.ds-chapter-link strong{font:400 .95rem/1.16 'Shippori Mincho','Yu Mincho',serif}.ds-chapter-link em{grid-column:2;color:var(--yellow-deep,#6f5f28);font-style:normal}"
+    },
+    {
+      "name": "Reader Layer Switch",
+      "kind": "button",
+      "description": "An epistemic switch that keeps dossier and constructive distillation visibly separate.",
+      "html": "<nav class=\"ds-layer-switch\"><a aria-current=\"page\" href=\"#\">CHAPTER DOSSIER</a><span>DISTILLATION · NOT YET DEVELOPED</span></nav>",
+      "css": ".ds-layer-switch{display:flex;flex-wrap:wrap}.ds-layer-switch a,.ds-layer-switch span{display:inline-flex;align-items:center;min-height:3.15rem;padding:1rem 1.1rem;border:1px solid color-mix(in srgb,var(--ink,#17150f) 34%,transparent);font:500 .6rem/1 'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;letter-spacing:.08em}.ds-layer-switch a[aria-current=page]{color:var(--paper,#eae5d7);background:var(--ink,#17150f);border-color:var(--ink,#17150f)}.ds-layer-switch span{margin-left:-1px;opacity:.48}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Living Schematic Folio",
+    "overview": "Structured Book Shelf behaves like a private scholarly press whose books expose the source structure beneath their covers. The system is editorial first and refined second: full fields of color, asymmetrical reading space, narrow measures, exact hairlines, and large authored book objects create presence without turning the archive into a store or theatrical 3D demo. Motion has one ceremonial opening and then settles into weighted reading; provenance never disappears behind atmosphere.",
+    "keyCharacteristics": [
+      "Full-field editorial chapters rather than card stacks.",
+      "One Mincho reading register against one evidentiary Gothic sans register.",
+      "Square geometry, hairline division, and deliberately empty space.",
+      "Authored book objects as proof—not generic imagery or copied jackets.",
+      "Source paths, epistemic labels, and archive facts visible in the page hierarchy.",
+      "One aperture entry, one structural handoff, and no looping motion."
+    ],
+    "rules": [
+      {
+        "name": "The Three-Role Rule",
+        "body": "New hues do not enter the page to distinguish books or components. Hierarchy comes from field scale, alpha, typography, and structure.",
+        "section": "colors"
+      },
+      {
+        "name": "The Instrument Test",
+        "body": "Zen Kaku Gothic New is reserved for text that helps the reader locate, compare, verify, or act.",
+        "section": "typography"
+      },
+      {
+        "name": "The Folio Rule",
+        "body": "A section must behave like a page field, proof ledger, or authored artifact. Do not insert equal-size cards to consume empty space.",
+        "section": "layout"
+      },
+      {
+        "name": "The Physical-Plane Rule",
+        "body": "A shadow must answer what is above what. No panel glow, floating card shadow, or ambient halo is permitted.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Square Default Rule",
+        "body": "Radius is zero unless a future object real material construction requires a curve.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do let an entire section field carry a volume identity before adding component decoration.",
+      "Do keep real counts, source horizons, page ranges, epistemic labels, and paths close to the claim they qualify.",
+      "Do preserve one label-roll hover grammar across navigation and actions.",
+      "Do rebuild and verify the self-contained standalone after every source change."
+    ],
+    "donts": [
+      "Don't turn the folio into a store, testimonial page, summary feed, dashboard, or equal-card catalogue.",
+      "Don't copy Stripe Press branding, covers, logos, purchase rows, source markup, or scripts.",
+      "Don't introduce generic AI glow, glass, neon, animated wireframes, or synthetic-mind theater.",
+      "Don't animate layout properties, translate the outer footer plate, or add a second signature gesture."
+    ]
+  }
+}

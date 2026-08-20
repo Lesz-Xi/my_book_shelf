@@ -1,0 +1,1079 @@
+@font-face {
+  font-family: "Zen Old Mincho";
+  src: url("assets/fonts/zen-old-mincho-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Zen Old Mincho";
+  src: url("assets/fonts/zen-old-mincho-latin-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  src: url("assets/fonts/zen-kaku-gothic-new-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  src: url("assets/fonts/zen-kaku-gothic-new-latin-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --ivory: #f1eee4;
+  --sumi: #2b2620;
+  --sage: #989d87;
+  --oak: #b99568;
+  --oak-deep: color-mix(in srgb, var(--oak) 62%, var(--sumi));
+  --display: "Zen Old Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --instrument: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --header-height: 4.75rem;
+  --measure: 38rem;
+  --rule: color-mix(in srgb, var(--sumi) 18%, transparent);
+  --rule-strong: color-mix(in srgb, var(--sumi) 32%, transparent);
+  --ink-dim: color-mix(in srgb, var(--sumi) 58%, transparent);
+  --ink-faint: color-mix(in srgb, var(--sumi) 38%, transparent);
+  --active: var(--oak-deep);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  color: var(--sumi);
+  font-family: var(--display);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+button,
+[role="button"] {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+button {
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+figure,
+dl,
+dd,
+ol,
+ul,
+pre {
+  margin: 0;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+::selection {
+  color: var(--sumi);
+  background: var(--oak);
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.65rem;
+  left: 0.65rem;
+  z-index: 300;
+  padding: 0.7rem 0.9rem;
+  color: var(--ivory);
+  background: var(--sumi);
+  font: 500 0.625rem/1 var(--instrument);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: translateY(-150%);
+  transition: transform 0.3s var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.reader-app {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+.reader-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: minmax(15rem, 1fr) auto minmax(15rem, 1fr);
+  align-items: center;
+  min-height: var(--header-height);
+  padding: 0 clamp(1rem, 2.3vw, 2.25rem);
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--ivory) 94%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.reader-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 0.85rem;
+  max-width: max-content;
+  font-size: 0.96rem;
+  line-height: 1;
+}
+
+.brand-mark {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 0.27rem);
+  align-items: end;
+  gap: 0.14rem;
+  width: 1.09rem;
+  height: 1.3rem;
+  flex: 0 0 auto;
+}
+
+.brand-mark i {
+  display: block;
+  width: 100%;
+  border: 1px solid currentColor;
+  border-bottom-width: 2px;
+}
+
+.brand-mark i:nth-child(1) { height: 76%; }
+.brand-mark i:nth-child(2) { height: 100%; }
+.brand-mark i:nth-child(3) { height: 58%; }
+
+.reader-location {
+  justify-self: center;
+  color: var(--ink-dim);
+  font: 400 0.61rem/1.35 var(--instrument);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.chapter-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.75rem;
+  padding: 0;
+  background: transparent;
+  font: 500 0.63rem/1 var(--instrument);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-mark {
+  position: relative;
+  display: block;
+  width: 1.25rem;
+  height: 0.8rem;
+}
+
+.menu-mark i {
+  position: absolute;
+  right: 0;
+  width: 1.25rem;
+  height: 1px;
+  background: currentColor;
+  transition: transform 0.35s var(--ease), top 0.35s var(--ease);
+}
+
+.menu-mark i:first-child { top: 0.2rem; }
+.menu-mark i:last-child { top: 0.6rem; width: 0.8rem; }
+
+.chapter-menu[aria-expanded="true"] .menu-mark i:first-child {
+  top: 0.42rem;
+  transform: rotate(45deg);
+}
+
+.chapter-menu[aria-expanded="true"] .menu-mark i:last-child {
+  top: 0.42rem;
+  width: 1.25rem;
+  transform: rotate(-45deg);
+}
+
+.reader-workspace {
+  position: absolute;
+  inset: var(--header-height) 0 0;
+  min-height: 0;
+  background: var(--ivory);
+}
+
+.chapter-rail,
+.reader-page {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chapter-rail::-webkit-scrollbar,
+.reader-page::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.chapter-rail {
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--ivory);
+}
+
+/* With JavaScript the rail is a drawer at every viewport: closed while reading. */
+.js .chapter-rail {
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  left: 0;
+  z-index: 70;
+  width: min(88vw, 24rem);
+  border-right: 1px solid var(--rule-strong);
+  transform: translate3d(-102%, 0, 0);
+  transition: transform 0.55s var(--ease);
+}
+
+.js .chapter-rail.is-open {
+  transform: translate3d(0, 0, 0);
+}
+
+.rail-head {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.65rem 1.5rem 1.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rail-head p:first-child,
+.rail-toc-label,
+.document-register,
+.book-group-head > p,
+.layer-unavailable,
+.chapter-number,
+.pilot-mark {
+  font: 500 0.57rem/1.4 var(--instrument);
+  letter-spacing: 0.095em;
+  text-transform: uppercase;
+}
+
+.rail-head p:first-child {
+  color: var(--sumi);
+}
+
+.rail-head p:last-child {
+  max-width: 28ch;
+  color: var(--ink-dim);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.book-group {
+  --book-accent: var(--oak-deep);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.book-group-yellow {
+  --book-accent: var(--oak-deep);
+}
+
+.book-group-head {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.65rem 1.5rem 1.2rem;
+}
+
+.book-group-head > p {
+  color: var(--ink-faint);
+}
+
+.book-group-head > a {
+  max-width: 15rem;
+  color: var(--sumi);
+  font-size: clamp(1.25rem, 1.7vw, 1.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.book-group-head > span {
+  color: var(--ink-dim);
+  font: 400 0.55rem/1.45 var(--instrument);
+  letter-spacing: 0.04em;
+}
+
+.book-group ol {
+  padding: 0;
+  list-style: none;
+}
+
+.book-group li {
+  border-top: 1px solid var(--rule);
+}
+
+.chapter-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: start;
+  min-height: 3.8rem;
+  padding: 0.95rem 1.5rem 0.9rem;
+  isolation: isolate;
+}
+
+.chapter-link::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: -1;
+  width: 1px;
+  content: "";
+  background: var(--oak);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s var(--ease);
+}
+
+.chapter-link:hover::before,
+.chapter-link:focus-visible::before,
+.chapter-link.is-active::before {
+  transform: scaleY(1);
+}
+
+.chapter-link.is-active {
+  background: color-mix(in srgb, var(--oak) 10%, transparent);
+}
+
+.chapter-number {
+  color: var(--ink-faint);
+  transition: color 0.3s var(--ease);
+}
+
+.chapter-name {
+  max-width: 18rem;
+  font-size: 0.95rem;
+  line-height: 1.16;
+  transition: transform 0.4s var(--ease);
+}
+
+.chapter-link:hover .chapter-name,
+.chapter-link:focus-visible .chapter-name,
+.chapter-link.is-active .chapter-name {
+  transform: translate3d(0.22rem, 0, 0);
+}
+
+.chapter-link.is-active .chapter-number {
+  color: var(--book-accent);
+}
+
+.pilot-mark {
+  grid-column: 2;
+  width: max-content;
+  margin-top: 0.1rem;
+  color: var(--book-accent);
+  font-size: 0.48rem;
+  letter-spacing: 0.08em;
+}
+
+.rail-toc {
+  display: grid;
+  gap: 1rem;
+  padding: 1.65rem 1.5rem 2.4rem;
+}
+
+.rail-toc-label {
+  color: var(--ink-faint);
+}
+
+.article-toc {
+  display: grid;
+}
+
+.article-toc a {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 0.9rem;
+  border-left: 1px solid var(--rule-strong);
+  color: var(--ink-dim);
+  font-size: 0.85rem;
+  line-height: 1.18;
+  transition: color 0.3s var(--ease), transform 0.4s var(--ease), border-color 0.3s var(--ease);
+}
+
+.article-toc a:hover,
+.article-toc a:focus-visible,
+.article-toc a.is-current {
+  color: var(--sumi);
+  border-color: var(--active);
+  transform: translate3d(0.18rem, 0, 0);
+}
+
+.rail-scrim {
+  display: none;
+}
+
+.js .rail-scrim {
+  position: fixed;
+  inset: var(--header-height) 0 0;
+  z-index: 60;
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: color-mix(in srgb, var(--sumi) 42%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+
+.js .rail-scrim.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.reader-page {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  background: var(--ivory);
+}
+
+.reader-scroll-content {
+  width: 100%;
+  min-height: 100%;
+}
+
+.reader-documents {
+  min-height: calc(100dvh - var(--header-height));
+}
+
+.reader-document {
+  --volume-accent: var(--oak-deep);
+  position: relative;
+  min-height: calc(100dvh - var(--header-height));
+  background: var(--ivory);
+}
+
+.reader-document.theme-yellow {
+  --volume-accent: var(--oak-deep);
+}
+
+.js .reader-document[hidden] {
+  display: none;
+}
+
+/* Chapter head — one centered column at the reading measure. */
+
+.document-head {
+  max-width: calc(var(--measure) + 2.5rem);
+  margin: 0 auto;
+  padding: clamp(4.5rem, 9vw, 8rem) 1.25rem 0;
+}
+
+.document-register {
+  color: var(--oak-deep);
+}
+
+.document-number {
+  margin-top: clamp(1.4rem, 3vw, 2.2rem);
+  color: color-mix(in srgb, var(--sumi) 15%, transparent);
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.document-head h1 {
+  margin-top: clamp(1rem, 2.4vw, 1.8rem);
+  max-width: 17ch;
+  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.document-head h1:focus {
+  outline: 0;
+}
+
+.document-author {
+  margin-top: 1rem;
+  color: var(--ink-dim);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+.document-meta {
+  margin-top: 0.55rem;
+  color: var(--ink-faint);
+  font: 400 0.72rem/1.5 var(--instrument);
+  letter-spacing: 0.05em;
+}
+
+.document-source {
+  margin-top: 1.9rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--rule);
+}
+
+.document-source summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--oak-deep);
+  font: 500 0.6rem/1 var(--instrument);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+
+.document-source summary::-webkit-details-marker {
+  display: none;
+}
+
+.document-source summary::before {
+  content: "+";
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.document-source[open] summary::before {
+  content: "–";
+}
+
+.document-source p {
+  margin-top: 0.85rem;
+  max-width: 34rem;
+  color: var(--ink-dim);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.document-source code {
+  display: block;
+  margin-top: 0.55rem;
+  overflow-wrap: anywhere;
+  color: var(--ink-faint);
+  font: 400 0.56rem/1.55 var(--instrument);
+}
+
+.layer-switch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.7rem;
+  margin-top: 2.3rem;
+}
+
+.layer-link {
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid transparent;
+  color: var(--ink-dim);
+  font: 500 0.62rem/1 var(--instrument);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.layer-link:hover,
+.layer-link:focus-visible {
+  color: var(--sumi);
+}
+
+.layer-link[aria-current="page"] {
+  color: var(--sumi);
+  border-color: var(--oak);
+}
+
+.layer-unavailable {
+  color: var(--ink-faint);
+  cursor: not-allowed;
+}
+
+.evidence-boundary {
+  margin-top: 1.9rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.evidence-boundary span {
+  margin-right: 0.75rem;
+  font: 500 0.55rem/1 var(--instrument);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* The reading measure — one quiet column. */
+
+.document-reading-grid {
+  padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(5rem, 9vw, 8rem);
+}
+
+.markdown-body {
+  min-width: 0;
+  max-width: calc(var(--measure) + 2.5rem);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  font-size: 1.09rem;
+  line-height: 1.75;
+}
+
+.markdown-body > * + * {
+  margin-top: 1.25rem;
+}
+
+.markdown-body h2 {
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+  font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.markdown-body > h2:first-child {
+  margin-top: 0;
+}
+
+.markdown-body h3 {
+  margin-top: 2.8rem;
+  color: var(--sumi);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.markdown-body h4 {
+  margin-top: 2.2rem;
+  color: var(--oak-deep);
+  font: 500 0.65rem/1.4 var(--instrument);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.markdown-body p,
+.markdown-body li {
+  max-width: var(--measure);
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  display: grid;
+  gap: 0.55rem;
+  padding-left: 1.35rem;
+}
+
+.markdown-body li::marker {
+  color: var(--oak-deep);
+}
+
+.markdown-body strong {
+  font-weight: 700;
+}
+
+.markdown-body em {
+  font-style: italic;
+}
+
+.markdown-body a {
+  border-bottom: 1px solid color-mix(in srgb, var(--oak-deep) 55%, transparent);
+  color: var(--oak-deep);
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus-visible {
+  border-color: currentColor;
+}
+
+.markdown-body blockquote {
+  margin-top: 2.4rem;
+  margin-bottom: 2.4rem;
+  padding: 0.2rem 0 0.2rem clamp(1.2rem, 3vw, 2.1rem);
+  border-left: 1px solid var(--oak);
+}
+
+.markdown-body blockquote p {
+  font-size: 1.28rem;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.markdown-body hr {
+  height: 1px;
+  margin: 3.6rem 0;
+  border: 0;
+  background: var(--rule);
+}
+
+.markdown-body code {
+  overflow-wrap: anywhere;
+  color: var(--oak-deep);
+  font: 400 0.78em/1.5 var(--instrument);
+}
+
+.markdown-body pre {
+  max-width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.35rem;
+  overflow: auto;
+  color: var(--ivory);
+  background: var(--sumi);
+  scrollbar-width: thin;
+}
+
+.markdown-body pre code {
+  color: inherit;
+  font-size: 0.72rem;
+  white-space: pre;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.91rem;
+  line-height: 1.45;
+  scrollbar-width: thin;
+}
+
+.markdown-body thead {
+  font: 500 0.58rem/1.4 var(--instrument);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.markdown-body th,
+.markdown-body td {
+  min-width: 9rem;
+  padding: 0.85rem 0.9rem 0.85rem 0;
+  border-top: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown-body th {
+  color: var(--ink-dim);
+}
+
+.markdown-body tbody tr:last-child td {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Chapter turn — a quiet page turn at the end of the measure. */
+
+.chapter-turn {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.5rem;
+  max-width: calc(var(--measure) + 2.5rem);
+  margin: 0 auto;
+  padding: 0 1.25rem clamp(5rem, 9vw, 8rem);
+}
+
+.chapter-turn[hidden] {
+  display: none;
+}
+
+.turn-link {
+  display: grid;
+  gap: 0.65rem;
+  max-width: 17rem;
+}
+
+.turn-link[hidden] {
+  display: none;
+}
+
+.turn-link span {
+  color: var(--ink-faint);
+  font: 500 0.58rem/1 var(--instrument);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.turn-link strong {
+  font-size: 1.18rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  transition: color 0.3s var(--ease), transform 0.4s var(--ease);
+}
+
+.turn-link:hover strong,
+.turn-link:focus-visible strong {
+  color: var(--oak-deep);
+  transform: translate3d(0.22rem, 0, 0);
+}
+
+.turn-next {
+  justify-items: end;
+  text-align: right;
+}
+
+.turn-next:hover strong,
+.turn-next:focus-visible strong {
+  transform: translate3d(-0.22rem, 0, 0);
+}
+
+[data-roll] .roll-w {
+  position: relative;
+  display: inline-block;
+  overflow: clip;
+  vertical-align: top;
+}
+
+[data-roll] .roll-t {
+  display: inline-block;
+  transition: transform 0.45s var(--ease);
+}
+
+[data-roll] .roll-t.dup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+[data-roll]:hover .roll-t,
+[data-roll]:focus-visible .roll-t {
+  transform: translate3d(0, -100%, 0);
+}
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 0.28rem;
+}
+
+.sync-required {
+  padding: 2rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Without JavaScript everything rests visible and the page scrolls natively. */
+
+html.no-js,
+html.no-js body {
+  height: auto;
+  overflow: auto;
+}
+
+.no-js .reader-app {
+  height: auto;
+  overflow: visible;
+}
+
+.no-js .reader-header {
+  position: static;
+}
+
+.no-js .chapter-menu,
+.no-js .rail-scrim {
+  display: none;
+}
+
+.no-js .reader-workspace {
+  position: static;
+}
+
+.no-js .chapter-rail {
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.no-js .reader-page {
+  height: auto;
+  overflow: visible;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --header-height: 4.25rem;
+  }
+
+  .reader-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0 1.1rem;
+  }
+
+  .reader-location {
+    display: none;
+  }
+
+  .document-head {
+    padding-top: 3.2rem;
+  }
+
+  .document-head h1 {
+    max-width: 100%;
+    font-size: clamp(2.2rem, 9vw, 3rem);
+  }
+
+  .document-reading-grid {
+    padding: 3rem 0 5rem;
+  }
+
+  .chapter-turn {
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+
+  .turn-next {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .turn-next:hover strong,
+  .turn-next:focus-visible strong {
+    transform: translate3d(0.22rem, 0, 0);
+  }
+}
+
+@media (max-width: 520px) {
+  .reader-brand {
+    font-size: 0.88rem;
+  }
+
+  .chapter-menu {
+    font-size: 0.56rem;
+  }
+
+  .markdown-body {
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .markdown-body h2 {
+    font-size: clamp(1.45rem, 7.5vw, 1.8rem);
+  }
+
+  .markdown-body blockquote p {
+    font-size: 1.18rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media print {
+  html,
+  body {
+    height: auto;
+    overflow: visible;
+    background: white;
+  }
+
+  .reader-app,
+  .reader-workspace,
+  .reader-page {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .reader-header,
+  .chapter-rail,
+  .rail-scrim,
+  .chapter-turn,
+  .layer-switch,
+  .document-source {
+    display: none !important;
+  }
+
+  .js .reader-document[hidden] {
+    display: none;
+  }
+
+  .reader-document {
+    min-height: 0;
+  }
+
+  .document-head,
+  .document-reading-grid {
+    padding: 1.5rem 0;
+  }
+
+  .document-head h1 {
+    font-size: 2.4rem;
+  }
+
+  .markdown-body {
+    max-width: none;
+    font-size: 11pt;
+  }
+}

@@ -1,73 +1,85 @@
-# Build prompt
+# Structured Book Shelf — Build and Extension Prompt
 
-Use this prompt with Codex, Cursor, Claude Code, Aura Build, or another coding agent. It is intentionally implementation-aware but leaves room for a new visual identity.
+Use this contract when extending the page with an agent.
 
 ```text
-Create an original, premium Three.js experience called “The Complete Shelf.”
+Build or extend Structured Book Shelf as a source-grounded living schematic folio.
 
-GOAL
-Build a warm editorial 3D library where people browse a continuous shelf of seven hardcovers and inspect each volume in detail.
+PRODUCT
+Structured Book Shelf turns completed books into re-readable cognitive instruments. It preserves the source book, measured structure, chapter dossiers, epistemic labels, interpretations, open questions, and constructive distillations without collapsing them into one authority.
 
-THE COLLECTION
-Create seven distinct clothbound books focused on Codex, Claude Code, Cursor, Antigravity, Figma, Framer, and Xcode. Give every volume its own proportion, palette, abstract foil motif, subtitle, short editorial description, binding specification, and sample page content.
+CANONICAL CONTENT
+/Users/lesz/.twin-sparrow/agent/memory/Book Schematics
 
-BROWSING
-- Navigate the shelf with wheel, arrow keys, previous/next buttons, and position markers.
-- Keep the center volume clearly selected.
-- Use true single-click hit targets for the books. Do not make shelf navigation depend on drag gestures.
-- Hide any visible wraparound jump when the continuous shelf loops.
+Raw books remain separate under:
+/Users/lesz/.twin-sparrow/agent/memory/Books
 
-DETAIL VIEW
-- Move the selected book from its exact shelf pose into inspection without a discontinuity.
-- Keep the book responsively positioned beside the editorial information panel.
-- Support orbit, pan, and zoom on the background.
-- Keep the book closed by default.
-- On cover hover, crack the front board open slightly.
-- On cover click or drag, open to the title page.
-- Let readers drag pages in both directions. Use segmented page geometry so the active sheet bends, twists, and settles with a restrained cloth-like curve.
-- At the beginning, let the user drag the cover closed.
-- When returning to the shelf, close the pages and animate the book, camera, shelf, and view offset to exact deterministic endpoints before reparenting the model.
+REPRESENTATION
+Do not represent the product as a bookstore, review feed, summary app, source-PDF viewer, file dashboard, or decorative 3D shelf. The landing surface is a living schematic folio: book identity remains primary while source structure and provenance become inspectable. The Reader is a separate source-aware reading folio: book → chapter → dossier → completed distillation. Never absorb long-form chapter text into the landing page or collapse dossier and distillation into one unlabeled layer.
 
-BOOK CRAFT
-- Model separate front and back boards, a straight spine, hinges, shoulders, endpapers, page block, individual preview sheets, page-edge layering, headbands, bookmark, foil accents, and soft contact shadows.
-- Keep the silhouette sharp and book-like. Avoid pill-shaped boards and an overly rounded spine.
-- Use physically based materials with restrained roughness variation.
-- Generate fine cloth weave, paper grain, page-edge lines, foil roughness, wood grain, and subtle normal maps procedurally.
-- Give the front, spine, and back their own correctly oriented artwork. Back-cover text must never be mirrored.
+DIRECTION
+Editorial / magazine is primary; Luxury / refined minimal is seasoning. The Stripe Press capture in press.stripe.com--2026-08-20-0017/ is evidence for asymmetric reading space, full-field color chapters, book-object presence, narrow measures, and hairline action rows. Do not copy its brand, logo, covers, exact composition, purchase grammar, testimonial layout, scripts, fonts, or source.html.
 
-ART DIRECTION
-- Aim for warm editorial minimalism: confident typography, quiet negative space, controlled color, and soft studio lighting.
-- Take inspiration from high-end contemporary book publishing without copying a real cover or publisher identity.
-- Theme the background and information panel from the selected book while maintaining strong text contrast.
-- Keep the shelf view minimal: no decorative frame and no large overlay copy.
+TASTE
+- proof before pitch
+- mechanism before atmosphere
+- instrument over dashboard
+- material warmth under technical rigor
+- calm density
+- source and interpretation remain distinct
+- beauty reveals structure rather than hiding it
+
+MOTION
+- landing: one signature gesture, aperture entry, once
+- Reader: immediate entry, no veil; one quiet chapter-leaf crossfade
+- Lenis scroll weight 2.0 on wheel/trackpad; Reader applies it only to the reading plane
+- no trail line
+- landing: one parallax handoff and one inner-rise footer reveal; never translate the outer sticky footer plate
+- landing: two reveal registers maximum; Reader does not animate prose on viewport entry
+- one label-roll/hairline hover grammar
+- no loops
+- reduced motion disables Lenis and resolves every surface to its complete still state
+
+VISUAL SYSTEM
+- one muted schematic-yellow accent with warm mineral paper, sumi-like ink, and deep yellow only where contrast requires it
+- Shippori Mincho for display and long-form reading
+- Zen Kaku Gothic New for evidence, paths, labels, measurements, navigation, and controls
+- Japanese restraint is structural: quiet hierarchy, hairlines, ma, and exact spacing—not decorative motifs
+- square geometry
+- hairlines and space over cards and elevation
+- physical shadows only beneath actual book objects
+- no generic AI glow, glass, pill interfaces, or purple-pink gradients
+
+CONTENT DISCIPLINE
+- use real archive counts and source paths
+- mark historical/book-era facts, prediction, inference, meaning-frame, and current unknowns correctly
+- never invent testimonials, customers, metrics, prices, or completion status
+- a new book must derive its own epistemic grammar rather than mechanically copying AI 2041 or Jung
+- every added section must supply a missing form of conviction and replace or compress weaker explanation
 
 ENGINEERING
-- Deliver one self-contained index.html file with inline CSS and JavaScript.
-- Use a pinned Three.js ES-module version and OrbitControls.
-- Do not use Mint, Mint MCP, runtime MCP calls, trackers, or a backend.
-- Make all interaction controls accessible by name and provide live status updates.
-- Respect prefers-reduced-motion.
-- Use a clear interaction state machine for shelf, opening, inspection, reading, and closing.
-- Prefer time-based deterministic interpolation over frame-dependent lerp cutoffs. The first and final pose of every transition must match exactly.
+- folio source: index.html, styles.css, app.js
+- Reader source: reader.html, reader.css, reader.js, generated reader-data.js
+- sync-reader-content.py compiles canonical Markdown through local Pandoc and regenerates static Reader regions
+- dependencies live under assets/vendor/; never use a CDN or captured-origin script
+- fonts live under assets/fonts/ with licenses
+- build-standalone.py emits both structured-book-shelf-standalone.html and structured-book-reader-standalone.html with CSS, JS, fonts, libraries, and Reader content inlined
+- both standalone artifacts must work offline over file://
+- every interactive element is keyboard-reachable with visible focus
+- the folio remains usable if GSAP, SplitText, ScrollTrigger, or Lenis fails
+- the Reader exposes all 25 documents if JavaScript fails
+- hide production scrollbars while preserving scroll
 
 VERIFICATION
-- Run the page from a local HTTP server.
-- Test shelf navigation with wheel, keys, buttons, and markers.
-- Test a single click from the shelf into detail.
-- Test hover, click, and drag opening.
-- Drag forward and backward through multiple pages and confirm the committed page does not spring back.
-- Drag the cover closed from the first page.
-- Return to the shelf from both a closed and open book.
-- Sample the first, middle, penultimate, and final animation frames to rule out jumps.
-- Check desktop and narrow layouts.
-- Finish with zero console errors or warnings.
+- synchronize canonical Reader content before rebuilding when Markdown changes
+- rebuild after every source change
+- verify both standalone artifacts, not only the source pages
+- capture landing entry/middle/end and Reader dossier/distillation/mobile states over file://
+- confirm zero console errors and zero network requests
+- confirm the landing first viewport contains the full promise, real artifact, and primary action
+- confirm all 23 dossiers, exactly 2 completed distillations, reduced motion, mobile chapter selection, and the 25-document no-JavaScript fallback
+- confirm no accidental one-word headline columns
+- confirm no source/interpretation collapse
 ```
 
-## Remix directions
-
-Change only one or two systems at a time so the material craft remains coherent:
-
-- Replace the seven creative tools with architecture, cinema, typography, or music volumes.
-- Move from cloth and foil to translucent resin, recycled paper, or technical manuals.
-- Keep the model but redesign the shelf as a reading table, archive drawer, or museum plinth.
-- Replace the editorial palette while retaining the deterministic motion and page physics.
+Before adding a third volume, read `PRODUCT.md`, `REPRESENTATION.md`, `READER-REPRESENTATION.md`, and `DESIGN.md`. If the shelf grows until retrieval becomes the primary job, add a separate archive-index surface rather than turning the landing folio or Reader into a dashboard grid.

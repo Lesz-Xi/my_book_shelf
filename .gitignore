@@ -1,1 +1,6 @@
 .DS_Store
+__pycache__/
+*.pyc
+press.stripe.com--2026-08-20-0017/
+screenshots/
+reader-screenshots/

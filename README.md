@@ -1,92 +1,148 @@
-# The Complete Shelf
+# Structured Book Shelf
 
-An original, interactive Three.js library of seven clothbound hardcovers. Browse the continuous shelf, pull a volume into a responsive detail view, orbit the binding, and drag through a small set of physically curved pages.
+A source-grounded wabi-sabi reading room and offline chapter Reader for a living archive of book schematics.
 
-[**View the live experience**](https://mengto.github.io/complete-shelf/) · [**Read the build prompt**](PROMPT.md)
+Structured Book Shelf begins where an ordinary reading archive usually ends. It keeps the source book separate and recoverable, measures its structure, maps each chapter, marks where interpretation begins, and creates constructive distillations only as a distinct, corrigible layer.
 
-![The Complete Shelf with seven clothbound volumes](assets/complete-shelf-preview.jpg)
+## Open the finished surfaces
 
-The collection is organized around seven tools for modern creative work:
-
-1. Codex
-2. Claude Code
-3. Cursor
-4. Antigravity
-5. Figma
-6. Framer
-7. Xcode
-
-## What is inside
-
-- A continuous seven-volume shelf navigated with the wheel, arrow keys, buttons, or position markers.
-- Detailed hardcover construction with separate boards, spine, hinges, endpapers, page block, headbands, bookmark, foil, and contact shadows.
-- Responsive inspection mode with orbit, pan, zoom, hover-to-crack-open, click-to-open, and drag-to-turn page interactions.
-- Book-specific color systems that recolor the scene and editorial detail layout.
-- Procedural cloth, foil, paper, page-edge, wood, roughness, normal, and shadow textures.
-- Deterministic shelf-to-detail transitions with exact endpoints so reparenting the selected volume never produces a last-frame jump.
-- A generated ambient score plus distinct cloth, wood, hinge, page-turn, and closing Foley, with persistent mute and volume controls.
-- Accessible HTML controls and status announcements layered over the WebGL scene.
-
-## How it is made
-
-The entire experience lives in [`index.html`](index.html): markup, responsive layout, shaders and materials, book geometry, interaction state, animation, embedded image atlases, and embedded audio. There is no framework, bundler, backend, analytics layer, Mint dependency, or MCP call in the browser.
-
-The render stack uses [Three.js](https://threejs.org/) with physically based materials and `OrbitControls`. Cover and wood artwork are stored as embedded WebP atlases; supporting surface detail is generated at runtime with canvas textures. Each book is assembled from reusable geometry, while the front cover and pages use hinged groups and segmented meshes for curved page-turn motion.
-
-The soundtrack and five interaction cues were generated ahead of time through [Pika API Club](https://dev.pika.art/), trimmed and normalized locally, and embedded as MP3 data URLs. The API key and generation calls never ship to the browser. Audio begins only after a user gesture, pauses while the page is hidden, caps simultaneous voices, and remembers mute and volume preferences.
-
-Interaction is managed as a small state machine:
-
-```text
-shelf -> opening detail -> closed inspection -> open book -> closing -> shelf
-```
-
-Camera, book, shelf, and view-offset transforms share deterministic eased timelines. This keeps the animation continuous when a book moves between the shelf and inspection scene graphs.
-
-## Build or remix it with an agent
-
-Start from [`PROMPT.md`](PROMPT.md), attach a visual reference if you have one, and ask your preferred coding agent to work directly in `index.html`.
-
-- [**Codex**](https://openai.com/codex/get-started/) — work in the repository, run the local site, inspect interactions, and iterate against browser proof.
-- [**Cursor**](https://www.cursor.com/) — open the folder, give Agent the prompt, and review changes in the editor.
-- [**Claude Code**](https://claude.com/product/claude-code) — run Claude in the project directory and point it at the prompt and HTML file.
-- [**Aura Build**](https://aura.build) — use the prompt and screenshots as a starting point for a visual build or remix.
-
-Whichever tool you use, the useful loop is the same: make one focused change, run the page, verify the real interaction, inspect the console, and keep only the revision that improves the experience.
-
-## Run locally
-
-The page uses JavaScript modules, so serve it over HTTP instead of opening it directly from disk:
+Run the dev server — it serves the folio and the Reader with automatic browser reload on every source change:
 
 ```bash
-python3 -m http.server 4173
+python3 serve.py
 ```
 
-Then visit [http://localhost:4173](http://localhost:4173).
+This opens `http://127.0.0.1:8000/` (first free port from 8000). Use `--port N` to pin a port and `--no-open` to skip launching a browser tab.
 
-No install or build step is required. An internet connection is needed for the pinned Three.js modules and Inter font.
+For a shareable offline artifact, the standalone builds remain available:
+
+```text
+structured-book-shelf-standalone.html
+structured-book-reader-standalone.html
+```
+
+The folio’s `Enter the shelf` action and both volume actions open real Reader routes. Both standalone files contain their CSS, fonts, motion libraries, application code, and required content. They work offline over `file://`; no local server or network connection is required.
+
+## Current shelf
+
+Verified on 2026-08-20:
+
+- 2 source-book schematics
+- 23 chapter maps
+- 31 structured Markdown artifacts
+- 2 constructive-distillation pilots
+
+The canonical archive lives outside this presentation layer:
+
+```text
+/Users/lesz/.twin-sparrow/agent/memory/Book Schematics
+├── AI_2041
+└── Modern_Man_in_Search_of_a_Soul
+```
+
+Raw books remain separate under `memory/Books`.
+
+## Build
+
+When the canonical Markdown changes, synchronize the Reader first:
+
+```bash
+python3 sync-reader-content.py
+```
+
+Then rebuild both standalone artifacts (only needed when an offline, shareable file is wanted — day-to-day work happens through the dev server):
+
+```bash
+python3 build-standalone.py
+```
+
+The synchronization script reads the 23 canonical chapter dossiers and two completed distillations from `/Users/lesz/.twin-sparrow/agent/memory/Book Schematics`, converts them through the locally installed Pandoc, writes compact route metadata to `reader-data.js`, and regenerates the static chapter regions in `reader.html`.
+
+The source pages are served by the dev server, which auto-reloads the browser whenever an HTML, CSS, JS, or asset file changes:
+
+```bash
+python3 serve.py
+```
+
+Final verification runs against the served page; verify the standalone artifact with `verify-standalone.mjs` only when one has been built for distribution.
 
 ## Project structure
 
 ```text
-complete-shelf/
-├── index.html   # Complete production experience
-├── PROMPT.md    # Portable recreation and remix brief
-└── README.md    # Project overview and implementation notes
+Structured_Book_Shelf/
+├── index.html
+├── styles.css
+├── app.js
+├── reader.html
+├── reader.css
+├── reader.js
+├── reader-data.js
+├── sync-reader-content.py
+├── serve.py
+├── build-standalone.py
+├── structured-book-shelf-standalone.html
+├── structured-book-reader-standalone.html
+├── PRODUCT.md
+├── REPRESENTATION.md
+├── READER-REPRESENTATION.md
+├── DESIGN.md
+├── FINISH-REVIEW.md
+├── READER-FINISH-REVIEW.md
+├── PROMPT.md
+├── verify-standalone.mjs
+├── verify-reader.mjs
+├── assets/
+│   ├── fonts/
+│   └── vendor/
+├── screenshots/
+├── reader-screenshots/
+├── .impeccable/
+│   ├── design.json
+│   └── surfaces/
+│       ├── index-html.md
+│       └── reader-html.md
+└── press.stripe.com--2026-08-20-0017/
 ```
 
-## Design notes
+The Stripe Press capture is design evidence only. Its `source.html`, origin scripts, modules, analytics, stylesheets, fonts, and brand assets are never used as the recreation shell.
 
-The visual direction studies the clarity, material craft, and book photography of contemporary editorial publishers, including [Stripe Press](https://press.stripe.com/), while using original book titles, cover artwork, textures, layouts, and interaction design. This project is independent and is not affiliated with Stripe Press or the products represented by the seven volumes.
+## Behavior contract
 
-## More open source
+Shared:
 
-- **[Skills](https://github.com/MengTo/Skills)** — agent skills for designers and builders using Codex, Claude, Cursor and other AI coding agents. Browse them at [ui-skills.com](https://ui-skills.com).
-- **[Sketchbook](https://github.com/MengTo/sketchbook)** — a page-flipping sketchbook of Singapore in one static HTML file. [Live](https://mengto.com)
-- **[A Long-Expected Party](https://github.com/MengTo/a-long-expected-party)** — a procedural short film rendered live in the browser, with a Higgsfield-generated score and narration. [Live](https://mengto.github.io/a-long-expected-party/)
+- The landing folio and the Reader share one wabi-sabi three-palette voice (sage, ivory, natural oak, Zen Old Mincho + Zen Kaku Gothic New) with near-still handcrafted motion.
+- House scroll weight: Lenis `2.0` on wheel and trackpad.
+- Touch, keyboard, and reduced-motion scrolling remain native.
+- Trail line: off.
+- One hover grammar: upward label roll plus a hairline/ink attention shift.
+- The still page and JavaScript-failure page remain complete.
 
-## What I build
+Folio:
 
-- **[Aura](https://aura.build)** — an AI website builder that creates landing pages in seconds and exports to HTML and Figma.
-- **[Design+Code](https://designcode.io)** — learn to design and code React and Swift apps.
-- **[DreamCut](https://dreamcut.ai)** — an AI video editor and screen recorder.
+- One entry gesture: a quiet parting of ivory leaves, once.
+- One draw-once gesture per volume: the ink figure draws itself, then sits still.
+- No parallax, no scrub, no looping motion.
+
+Reader:
+
+- Immediate chapter entry with no veil.
+- One measure-wide reading column; the chapter rail is a drawer that rests closed while reading, holding books, chapters, and the active chapter's section map.
+- Source path and layer status sit behind a quiet `Source & layer` disclosure at the chapter head.
+- One quiet chapter-leaf crossfade.
+- Lenis applies only to the reading plane; the chapter rail drawer stays native.
+- Hash routes preserve book, chapter, and layer.
+- No JavaScript exposes all 25 reading documents as static HTML rather than hiding the archive.
+
+## Design decisions
+
+Read [`REPRESENTATION.md`](REPRESENTATION.md) for the landing-folio representation and [`READER-REPRESENTATION.md`](READER-REPRESENTATION.md) for the chapter-level reading instrument, progressive-enhancement model, cuts, tradeoff, and acceptance tests.
+
+The page deliberately rejects:
+
+- a decorative 3D demo shelf;
+- an e-commerce publisher catalogue;
+- a generic archive dashboard;
+- fabricated testimonials or usage claims;
+- story, prediction, or interpretation presented as fact.
+
+Its real object is a **living schematic folio**: the authored unity of a book with the source path, mechanism, and epistemic boundaries made visible.
