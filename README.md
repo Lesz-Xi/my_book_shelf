@@ -1,148 +1,95 @@
 # Structured Book Shelf
 
-A source-grounded wabi-sabi reading room and offline chapter Reader for a living archive of book schematics.
+A source-grounded, wabi-sabi **reading room on the web** — a living archive that turns finished books into measured, chapter-level instruments for re-reading, explanation, and responsible thought.
 
-Structured Book Shelf begins where an ordinary reading archive usually ends. It keeps the source book separate and recoverable, measures its structure, maps each chapter, marks where interpretation begins, and creates constructive distillations only as a distinct, corrigible layer.
+Structured Book Shelf begins where an ordinary reading archive usually ends. It keeps the source book separate and recoverable, measures its structure, maps each chapter, marks where interpretation begins, and creates constructive distillations only as a distinct, corrigible layer — never silently blended into the evidence.
 
-## Open the finished surfaces
+## What it is
 
-Run the dev server — it serves the folio and the Reader with automatic browser reload on every source change:
+Two surfaces, one voice:
 
-```bash
-python3 serve.py
-```
+- **The folio (`index.html`)** — a quiet landing that presents the shelf as two physical volumes. Each book is a draggable CSS-3D cuboid (jacket, cloth spine, page block) you can pick up and turn with a pointer. Near-still, handcrafted motion: one entry gesture, draw-once ink figures, no loops.
+- **The Reader (`reader.html`)** — a single-column reading room. One measure-wide column of text; books, chapters, and the active chapter's section map rest in a drawer that stays closed while you read. Source paths and layer status sit behind a quiet `Source & layer` disclosure — structure is one gesture away, never on the page uninvited.
 
-This opens `http://127.0.0.1:8000/` (first free port from 8000). Use `--port N` to pin a port and `--no-open` to skip launching a browser tab.
-
-For a shareable offline artifact, the standalone builds remain available:
-
-```text
-structured-book-shelf-standalone.html
-structured-book-reader-standalone.html
-```
-
-The folio’s `Enter the shelf` action and both volume actions open real Reader routes. Both standalone files contain their CSS, fonts, motion libraries, application code, and required content. They work offline over `file://`; no local server or network connection is required.
+Both speak the same wabi-sabi dialect: sage, ivory, and natural oak; Zen Old Mincho for the reading measure, Zen Kaku Gothic New for evidence and labels; square geometry, no cards, no dashboards.
 
 ## Current shelf
 
 Verified on 2026-08-20:
 
-- 2 source-book schematics
+- 2 source-book schematics — *AI 2041* (Lee & Chen) and *Modern Man in Search of a Soul* (Jung)
 - 23 chapter maps
 - 31 structured Markdown artifacts
-- 2 constructive-distillation pilots
+- 2 constructive-distillation pilots, kept visibly separate from their source dossiers
 
-The canonical archive lives outside this presentation layer:
+## Principles
 
-```text
-/Users/lesz/.twin-sparrow/agent/memory/Book Schematics
-├── AI_2041
-└── Modern_Man_in_Search_of_a_Soul
-```
+- **Evidence and interpretation never mix silently.** Every chapter dossier is source-grounded with page addresses; distillations are labeled, corrigible, and entered deliberately.
+- **The still page is complete.** Reduced-motion and no-JavaScript states are the same discipline seen two ways — with JS disabled, all 25 reading documents remain present as one long static volume.
+- **One motion language.** Lenis `2.0` weighted scroll on the reading plane only, a single hover grammar (upward label roll / hairline emphasis), and motion that settles instead of looping.
+- **Offline-first artifacts.** Standalone builds inline CSS, fonts, vendored motion libraries, and content into single HTML files that open over `file://` with zero network requests.
 
-Raw books remain separate under `memory/Books`.
+## Quick start
 
-## Build
-
-When the canonical Markdown changes, synchronize the Reader first:
-
-```bash
-python3 sync-reader-content.py
-```
-
-Then rebuild both standalone artifacts (only needed when an offline, shareable file is wanted — day-to-day work happens through the dev server):
-
-```bash
-python3 build-standalone.py
-```
-
-The synchronization script reads the 23 canonical chapter dossiers and two completed distillations from `/Users/lesz/.twin-sparrow/agent/memory/Book Schematics`, converts them through the locally installed Pandoc, writes compact route metadata to `reader-data.js`, and regenerates the static chapter regions in `reader.html`.
-
-The source pages are served by the dev server, which auto-reloads the browser whenever an HTML, CSS, JS, or asset file changes:
+Requires only Python 3 (standard library) for serving; [Pandoc](https://pandoc.org) is needed solely for re-syncing content from the canonical archive.
 
 ```bash
 python3 serve.py
 ```
 
-Final verification runs against the served page; verify the standalone artifact with `verify-standalone.mjs` only when one has been built for distribution.
+Opens `http://127.0.0.1:8000/` (first free port from 8000) with automatic browser reload on every source change. Use `--port N` to pin a port and `--no-open` to skip launching a browser tab.
+
+Prefer a double-clickable file? Open the standalone builds directly:
+
+```text
+structured-book-shelf-standalone.html   # the folio
+structured-book-reader-standalone.html  # the reading room
+```
+
+## How it's built
+
+The canonical Markdown archive lives outside this presentation layer; this repo is the instrument that renders it.
+
+```bash
+python3 sync-reader-content.py   # canonical Markdown → reader-data.js + reader.html regions (via Pandoc)
+python3 build-standalone.py      # inline CSS/JS/fonts/assets → the two standalone files
+```
+
+`sync-reader-content.py` converts the 23 chapter dossiers and 2 distillations through Pandoc, writes compact route metadata, and regenerates the marked regions of `reader.html` — hand-edits inside those regions are wiped by design.
+
+Verification is headless-Chrome over raw CDP (no Playwright dependency):
+
+```bash
+node verify-standalone.mjs   # folio checks + screenshots
+node verify-reader.mjs       # reader routing, drawer, reduced-motion, and no-JS checks
+```
+
+Both assert zero network requests, zero console/page errors, and a complete no-JS fallback, and exit non-zero on any failure.
 
 ## Project structure
 
 ```text
-Structured_Book_Shelf/
-├── index.html
-├── styles.css
-├── app.js
-├── reader.html
-├── reader.css
-├── reader.js
-├── reader-data.js
-├── sync-reader-content.py
-├── serve.py
-├── build-standalone.py
-├── structured-book-shelf-standalone.html
-├── structured-book-reader-standalone.html
-├── PRODUCT.md
-├── REPRESENTATION.md
-├── READER-REPRESENTATION.md
-├── DESIGN.md
-├── FINISH-REVIEW.md
-├── READER-FINISH-REVIEW.md
-├── PROMPT.md
-├── verify-standalone.mjs
-├── verify-reader.mjs
-├── assets/
-│   ├── fonts/
-│   └── vendor/
-├── screenshots/
-├── reader-screenshots/
-├── .impeccable/
-│   ├── design.json
-│   └── surfaces/
-│       ├── index-html.md
-│       └── reader-html.md
-└── press.stripe.com--2026-08-20-0017/
+├── index.html  styles.css  app.js        # the folio
+├── reader.html reader.css  reader.js     # the reading room
+├── reader-data.js                        # generated route + content metadata
+├── sync-reader-content.py                # canonical Markdown → reader pipeline
+├── serve.py                              # dev server with SSE live reload
+├── build-standalone.py                   # offline single-file builds
+├── verify-standalone.mjs  verify-reader.mjs
+├── assets/fonts/  assets/vendor/         # self-hosted fonts, vendored GSAP/ScrollTrigger/Lenis
+├── REPRESENTATION.md                     # folio design decision record
+├── READER-REPRESENTATION.md              # reader design decision record
+├── PRODUCT.md  DESIGN.md  PROMPT.md      # product framing and design briefs
+└── FINISH-REVIEW.md  READER-FINISH-REVIEW.md
 ```
 
-The Stripe Press capture is design evidence only. Its `source.html`, origin scripts, modules, analytics, stylesheets, fonts, and brand assets are never used as the recreation shell.
+The design decision records are the real documentation: they state the inherited representations that were rejected, the cuts, the tradeoffs, and the acceptance tests each surface is held to.
 
-## Behavior contract
+## What it deliberately refuses
 
-Shared:
-
-- The landing folio and the Reader share one wabi-sabi three-palette voice (sage, ivory, natural oak, Zen Old Mincho + Zen Kaku Gothic New) with near-still handcrafted motion.
-- House scroll weight: Lenis `2.0` on wheel and trackpad.
-- Touch, keyboard, and reduced-motion scrolling remain native.
-- Trail line: off.
-- One hover grammar: upward label roll plus a hairline/ink attention shift.
-- The still page and JavaScript-failure page remain complete.
-
-Folio:
-
-- One entry gesture: a quiet parting of ivory leaves, once.
-- One draw-once gesture per volume: the ink figure draws itself, then sits still.
-- No parallax, no scrub, no looping motion.
-
-Reader:
-
-- Immediate chapter entry with no veil.
-- One measure-wide reading column; the chapter rail is a drawer that rests closed while reading, holding books, chapters, and the active chapter's section map.
-- Source path and layer status sit behind a quiet `Source & layer` disclosure at the chapter head.
-- One quiet chapter-leaf crossfade.
-- Lenis applies only to the reading plane; the chapter rail drawer stays native.
-- Hash routes preserve book, chapter, and layer.
-- No JavaScript exposes all 25 reading documents as static HTML rather than hiding the archive.
-
-## Design decisions
-
-Read [`REPRESENTATION.md`](REPRESENTATION.md) for the landing-folio representation and [`READER-REPRESENTATION.md`](READER-REPRESENTATION.md) for the chapter-level reading instrument, progressive-enhancement model, cuts, tradeoff, and acceptance tests.
-
-The page deliberately rejects:
-
-- a decorative 3D demo shelf;
-- an e-commerce publisher catalogue;
-- a generic archive dashboard;
-- fabricated testimonials or usage claims;
+- a decorative 3D demo shelf or e-commerce catalogue;
+- a generic archive dashboard with counts and status widgets;
+- search, annotation, or reading-progress gamification (so far — see the tradeoff notes);
 - story, prediction, or interpretation presented as fact.
 
-Its real object is a **living schematic folio**: the authored unity of a book with the source path, mechanism, and epistemic boundaries made visible.
+Its real object is a **living schematic folio**: the authored unity of a book, with its source path, mechanism, and epistemic boundaries kept visible.
