@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f1eee4">
+  <meta name="theme-color" content="#2b2620">
   <meta name="description" content="Structured Book Shelf turns finished books into source-grounded instruments for re-reading, explanation, and responsible thought.">
   <title>Structured Book Shelf — Books That Keep Thinking</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232b2620'/%3E%3Cpath d='M18 14h22c5 0 8 3 8 8v28H26c-5 0-8-3-8-8V14Zm8 8v20h14V22H26Z' fill='%23b99568'/%3E%3C/svg%3E">
@@ -170,7 +170,7 @@ p {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: none;
-  background: var(--ivory);
+  background: var(--sumi);
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -1831,6 +1831,29 @@ body::-webkit-scrollbar {
   }
 }
 
+/* Dark surfaces (Opening, The argument, Method, Close) — the night room.
+   Paper-derived tokens remap to their ivory equivalents so hairlines,
+   dim labels, and ledger rules stay legible without per-element rewrites. */
+.surface-ink {
+  --rule-sumi: var(--rule-ivory);
+  --sumi-dim: var(--ivory-dim);
+  --sumi-faint: color-mix(in srgb, var(--ivory) 40%, transparent);
+}
+
+.surface-ink .action-primary .action-fill {
+  background: var(--ivory);
+}
+
+.surface-ink .action-primary:hover,
+.surface-ink .action-primary:focus-visible {
+  color: var(--sumi);
+  border-color: var(--ivory);
+}
+
+.surface-ink .book3d-shadow {
+  background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.5), transparent 70%);
+}
+
 </style>
 </head>
 <body>
@@ -1874,7 +1897,7 @@ body::-webkit-scrollbar {
 
     <main class="page" id="main-content" tabindex="-1">
       <div class="scroll-content">
-        <section class="section hero surface-paper" id="opening" data-section-title="Opening" data-section-description="The shelf begins after the last page.">
+        <section class="section hero surface-ink" id="opening" data-theme="dark" data-section-title="Opening" data-section-description="The shelf begins after the last page.">
           <div class="section-frame hero-frame">
             <div class="hero-copy">
               <h1 data-reveal-01="lines">The shelf begins after the last page.</h1>
@@ -1930,7 +1953,7 @@ body::-webkit-scrollbar {
           </div>
         </section>
 
-        <section class="section argument surface-paper" id="why" data-section-title="The argument" data-section-description="Not a summary. A structure you can re-enter.">
+        <section class="section argument surface-ink" id="why" data-theme="dark" data-section-title="The argument" data-section-description="Not a summary. A structure you can re-enter.">
           <div class="section-frame argument-frame">
             <div class="argument-aside">
               <p>Current shelf</p>

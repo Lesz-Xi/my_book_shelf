@@ -31,21 +31,21 @@
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --ivory: #f1eee4;
   --sumi: #2b2620;
   --sage: #989d87;
   --oak: #b99568;
-  --oak-deep: color-mix(in srgb, var(--oak) 62%, var(--sumi));
+  --oak-deep: color-mix(in srgb, var(--oak) 82%, var(--ivory));
   --display: "Zen Old Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
   --instrument: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
   --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
   --header-height: 4.75rem;
   --measure: 38rem;
-  --rule: color-mix(in srgb, var(--sumi) 18%, transparent);
-  --rule-strong: color-mix(in srgb, var(--sumi) 32%, transparent);
-  --ink-dim: color-mix(in srgb, var(--sumi) 58%, transparent);
-  --ink-faint: color-mix(in srgb, var(--sumi) 38%, transparent);
+  --rule: color-mix(in srgb, var(--ivory) 20%, transparent);
+  --rule-strong: color-mix(in srgb, var(--ivory) 34%, transparent);
+  --ink-dim: color-mix(in srgb, var(--ivory) 60%, transparent);
+  --ink-faint: color-mix(in srgb, var(--ivory) 40%, transparent);
   --active: var(--oak-deep);
 }
 
@@ -59,7 +59,7 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  background: var(--ivory);
+  background: var(--sumi);
 }
 
 html {
@@ -68,7 +68,7 @@ html {
 }
 
 body {
-  color: var(--sumi);
+  color: var(--ivory);
   font-family: var(--display);
 }
 
@@ -128,8 +128,8 @@ li {
   left: 0.65rem;
   z-index: 300;
   padding: 0.7rem 0.9rem;
-  color: var(--ivory);
-  background: var(--sumi);
+  color: var(--sumi);
+  background: var(--ivory);
   font: 500 0.625rem/1 var(--instrument);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -146,7 +146,7 @@ li {
   width: 100%;
   height: 100dvh;
   overflow: hidden;
-  background: var(--ivory);
+  background: var(--sumi);
 }
 
 .reader-header {
@@ -159,7 +159,7 @@ li {
   min-height: var(--header-height);
   padding: 0 clamp(1rem, 2.3vw, 2.25rem);
   border-bottom: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--ivory) 94%, transparent);
+  background: color-mix(in srgb, var(--sumi) 92%, transparent);
   backdrop-filter: blur(12px);
 }
 
@@ -250,7 +250,7 @@ li {
   position: absolute;
   inset: var(--header-height) 0 0;
   min-height: 0;
-  background: var(--ivory);
+  background: var(--sumi);
 }
 
 .chapter-rail,
@@ -273,7 +273,7 @@ body::-webkit-scrollbar {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
-  background: var(--ivory);
+  background: var(--sumi);
 }
 
 /* With JavaScript the rail is a drawer at every viewport: closed while reading. */
@@ -313,7 +313,7 @@ body::-webkit-scrollbar {
 }
 
 .rail-head p:first-child {
-  color: var(--sumi);
+  color: var(--ivory);
 }
 
 .rail-head p:last-child {
@@ -344,7 +344,7 @@ body::-webkit-scrollbar {
 
 .book-group-head > a {
   max-width: 15rem;
-  color: var(--sumi);
+  color: var(--ivory);
   font-size: clamp(1.25rem, 1.7vw, 1.7rem);
   line-height: 1.02;
   letter-spacing: -0.025em;
@@ -396,7 +396,7 @@ body::-webkit-scrollbar {
 }
 
 .chapter-link.is-active {
-  background: color-mix(in srgb, var(--oak) 10%, transparent);
+  background: color-mix(in srgb, var(--oak) 12%, transparent);
 }
 
 .chapter-number {
@@ -457,7 +457,7 @@ body::-webkit-scrollbar {
 .article-toc a:hover,
 .article-toc a:focus-visible,
 .article-toc a.is-current {
-  color: var(--sumi);
+  color: var(--ivory);
   border-color: var(--active);
   transform: translate3d(0.18rem, 0, 0);
 }
@@ -473,7 +473,7 @@ body::-webkit-scrollbar {
   display: block;
   width: 100%;
   padding: 0;
-  background: color-mix(in srgb, var(--sumi) 42%, transparent);
+  background: rgb(0 0 0 / 0.55);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s var(--ease);
@@ -492,7 +492,7 @@ body::-webkit-scrollbar {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: none;
-  background: var(--ivory);
+  background: var(--sumi);
 }
 
 .reader-scroll-content {
@@ -508,7 +508,7 @@ body::-webkit-scrollbar {
   --volume-accent: var(--oak-deep);
   position: relative;
   min-height: calc(100dvh - var(--header-height));
-  background: var(--ivory);
+  background: var(--sumi);
 }
 
 .reader-document.theme-yellow {
@@ -533,7 +533,7 @@ body::-webkit-scrollbar {
 
 .document-number {
   margin-top: clamp(1.4rem, 3vw, 2.2rem);
-  color: color-mix(in srgb, var(--sumi) 15%, transparent);
+  color: color-mix(in srgb, var(--ivory) 14%, transparent);
   font-size: clamp(3.5rem, 7vw, 5.5rem);
   line-height: 1;
   letter-spacing: -0.04em;
@@ -637,11 +637,11 @@ body::-webkit-scrollbar {
 
 .layer-link:hover,
 .layer-link:focus-visible {
-  color: var(--sumi);
+  color: var(--ivory);
 }
 
 .layer-link[aria-current="page"] {
-  color: var(--sumi);
+  color: var(--ivory);
   border-color: var(--oak);
 }
 
@@ -700,7 +700,7 @@ body::-webkit-scrollbar {
 
 .markdown-body h3 {
   margin-top: 2.8rem;
-  color: var(--sumi);
+  color: var(--ivory);
   font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.2;
@@ -783,7 +783,7 @@ body::-webkit-scrollbar {
   padding: 1.35rem;
   overflow: auto;
   color: var(--ivory);
-  background: var(--sumi);
+  background: color-mix(in srgb, var(--sumi) 52%, black);
   scrollbar-width: thin;
 }
 
@@ -1035,6 +1035,7 @@ html.no-js body {
   body {
     height: auto;
     overflow: visible;
+    color: var(--sumi);
     background: white;
   }
 
@@ -1075,5 +1076,10 @@ html.no-js body {
   .markdown-body {
     max-width: none;
     font-size: 11pt;
+  }
+
+  .markdown-body a,
+  .markdown-body code {
+    color: #7a5c2e;
   }
 }

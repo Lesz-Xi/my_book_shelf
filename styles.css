@@ -160,7 +160,7 @@ p {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: none;
-  background: var(--ivory);
+  background: var(--sumi);
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -1819,4 +1819,27 @@ body::-webkit-scrollbar {
   .motion-ready [data-reveal-02] {
     visibility: visible;
   }
+}
+
+/* Dark surfaces (Opening, The argument, Method, Close) — the night room.
+   Paper-derived tokens remap to their ivory equivalents so hairlines,
+   dim labels, and ledger rules stay legible without per-element rewrites. */
+.surface-ink {
+  --rule-sumi: var(--rule-ivory);
+  --sumi-dim: var(--ivory-dim);
+  --sumi-faint: color-mix(in srgb, var(--ivory) 40%, transparent);
+}
+
+.surface-ink .action-primary .action-fill {
+  background: var(--ivory);
+}
+
+.surface-ink .action-primary:hover,
+.surface-ink .action-primary:focus-visible {
+  color: var(--sumi);
+  border-color: var(--ivory);
+}
+
+.surface-ink .book3d-shadow {
+  background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.5), transparent 70%);
 }
