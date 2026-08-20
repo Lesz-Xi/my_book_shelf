@@ -1255,103 +1255,6 @@ body::-webkit-scrollbar {
   text-align: right;
 }
 
-.ridge {
-  position: absolute;
-  top: 50%;
-  right: clamp(1rem, 2.2vw, 2.2rem);
-  z-index: 45;
-  display: grid;
-  gap: 0.72rem;
-  color: var(--sumi);
-  transform: translateY(-50%);
-  transition: color 0.45s var(--ease), opacity 0.3s var(--ease);
-}
-
-.ridge.on-dark {
-  color: var(--ivory);
-}
-
-.ridge a {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 1.5rem;
-  height: 0.7rem;
-}
-
-.ridge a > i {
-  display: block;
-  width: 1rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.3;
-  transform: scaleX(0.62);
-  transform-origin: right center;
-  transition: transform 0.45s var(--ease), opacity 0.3s var(--ease), width 0.45s var(--ease), background 0.3s var(--ease);
-}
-
-.ridge a:hover > i,
-.ridge a:focus-visible > i,
-.ridge a.is-active > i {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-.ridge a.is-active > i {
-  width: 1.75rem;
-  background: var(--oak);
-}
-
-.ridge-tip {
-  position: absolute;
-  top: 50%;
-  right: 2rem;
-  display: grid;
-  grid-template-columns: 2.4rem minmax(8rem, 1fr);
-  width: 16rem;
-  color: currentColor;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(0.5rem, -50%, 0);
-  transition: opacity 0.3s var(--ease), transform 0.45s var(--ease);
-}
-
-.ridge a:hover .ridge-tip,
-.ridge a:focus-visible .ridge-tip {
-  opacity: 1;
-  transform: translate3d(0, -50%, 0);
-}
-
-.ridge-tip b,
-.ridge-tip em {
-  font-family: var(--instrument);
-  font-style: normal;
-  font-weight: 400;
-}
-
-.ridge-tip b {
-  grid-row: 1 / span 2;
-  padding-top: 0.15rem;
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  opacity: 0.55;
-}
-
-.ridge-tip strong {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.1;
-}
-
-.ridge-tip em {
-  margin-top: 0.25rem;
-  font-size: 0.48rem;
-  line-height: 1.35;
-  letter-spacing: 0.04em;
-  opacity: 0.58;
-}
-
 .entry-veil {
   position: fixed;
   inset: 0;
@@ -1437,10 +1340,6 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 1099px) {
-  .ridge {
-    display: none;
-  }
-
   .site-header {
     grid-template-columns: 1fr auto;
   }

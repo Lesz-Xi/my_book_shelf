@@ -1265,103 +1265,6 @@ body::-webkit-scrollbar {
   text-align: right;
 }
 
-.ridge {
-  position: absolute;
-  top: 50%;
-  right: clamp(1rem, 2.2vw, 2.2rem);
-  z-index: 45;
-  display: grid;
-  gap: 0.72rem;
-  color: var(--sumi);
-  transform: translateY(-50%);
-  transition: color 0.45s var(--ease), opacity 0.3s var(--ease);
-}
-
-.ridge.on-dark {
-  color: var(--ivory);
-}
-
-.ridge a {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 1.5rem;
-  height: 0.7rem;
-}
-
-.ridge a > i {
-  display: block;
-  width: 1rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.3;
-  transform: scaleX(0.62);
-  transform-origin: right center;
-  transition: transform 0.45s var(--ease), opacity 0.3s var(--ease), width 0.45s var(--ease), background 0.3s var(--ease);
-}
-
-.ridge a:hover > i,
-.ridge a:focus-visible > i,
-.ridge a.is-active > i {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-.ridge a.is-active > i {
-  width: 1.75rem;
-  background: var(--oak);
-}
-
-.ridge-tip {
-  position: absolute;
-  top: 50%;
-  right: 2rem;
-  display: grid;
-  grid-template-columns: 2.4rem minmax(8rem, 1fr);
-  width: 16rem;
-  color: currentColor;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(0.5rem, -50%, 0);
-  transition: opacity 0.3s var(--ease), transform 0.45s var(--ease);
-}
-
-.ridge a:hover .ridge-tip,
-.ridge a:focus-visible .ridge-tip {
-  opacity: 1;
-  transform: translate3d(0, -50%, 0);
-}
-
-.ridge-tip b,
-.ridge-tip em {
-  font-family: var(--instrument);
-  font-style: normal;
-  font-weight: 400;
-}
-
-.ridge-tip b {
-  grid-row: 1 / span 2;
-  padding-top: 0.15rem;
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  opacity: 0.55;
-}
-
-.ridge-tip strong {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.1;
-}
-
-.ridge-tip em {
-  margin-top: 0.25rem;
-  font-size: 0.48rem;
-  line-height: 1.35;
-  letter-spacing: 0.04em;
-  opacity: 0.58;
-}
-
 .entry-veil {
   position: fixed;
   inset: 0;
@@ -1447,10 +1350,6 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 1099px) {
-  .ridge {
-    display: none;
-  }
-
   .site-header {
     grid-template-columns: 1fr auto;
   }
@@ -2197,27 +2096,6 @@ body::-webkit-scrollbar {
       </div>
     </main>
 
-    <aside class="ridge" aria-label="Section index">
-      <a href="#opening" data-scroll-link data-section-link="opening" aria-label="Opening: The shelf begins after the last page">
-        <span class="ridge-tip"><b>00</b><strong>Opening</strong><em>The shelf begins after the last page.</em></span><i></i>
-      </a>
-      <a href="#why" data-scroll-link data-section-link="why" aria-label="The argument: Not a summary">
-        <span class="ridge-tip"><b>01</b><strong>The argument</strong><em>Not a summary. A structure.</em></span><i></i>
-      </a>
-      <a href="#ai-2041" data-scroll-link data-section-link="ai-2041" aria-label="AI 2041: Fiction and analysis">
-        <span class="ridge-tip"><b>02</b><strong>AI 2041</strong><em>Fiction and mechanism held apart.</em></span><i></i>
-      </a>
-      <a href="#jung" data-scroll-link data-section-link="jung" aria-label="Modern Man: Text and interpretation">
-        <span class="ridge-tip"><b>03</b><strong>Modern Man</strong><em>Text and meaning held apart.</em></span><i></i>
-      </a>
-      <a href="#method" data-scroll-link data-section-link="method" aria-label="Method: The evidence path">
-        <span class="ridge-tip"><b>04</b><strong>Method</strong><em>The evidence path remains visible.</em></span><i></i>
-      </a>
-      <a href="#sources" data-scroll-link data-section-link="sources" aria-label="Principle: Provenance and judgment">
-        <span class="ridge-tip"><b>05</b><strong>Principle</strong><em>Provenance at the root.</em></span><i></i>
-      </a>
-    </aside>
-
     <div class="entry-veil" aria-hidden="true">
       <div class="veil-panel veil-panel-top"></div>
       <div class="veil-panel veil-panel-bottom"></div>
@@ -2287,7 +2165,6 @@ function t(t,e,i){return Math.max(t,Math.min(e,i))}var e=class{isRunning=!1;valu
   const content = document.querySelector(".scroll-content");
   const veil = document.querySelector(".entry-veil");
   const header = document.querySelector(".site-header");
-  const ridge = document.querySelector(".ridge");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SCROLL_WEIGHT = 2;
 
@@ -2596,22 +2473,10 @@ function t(t,e,i){return Math.max(t,Math.min(e,i))}var e=class{isRunning=!1;valu
 
   function buildSectionState(ScrollTrigger) {
     const sections = [...document.querySelectorAll("[data-section-title]")];
-    const links = [...document.querySelectorAll("[data-section-link]")];
 
     function activate(section) {
-      const id = section.id;
       const onDark = section.dataset.theme === "dark";
-      links.forEach((link) => {
-        const active = link.dataset.sectionLink === id;
-        link.classList.toggle("is-active", active);
-        if (active) {
-          link.setAttribute("aria-current", "location");
-        } else {
-          link.removeAttribute("aria-current");
-        }
-      });
       header?.classList.toggle("on-dark", onDark);
-      ridge?.classList.toggle("on-dark", onDark);
     }
 
     sections.forEach((section) => {

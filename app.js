@@ -6,7 +6,6 @@
   const content = document.querySelector(".scroll-content");
   const veil = document.querySelector(".entry-veil");
   const header = document.querySelector(".site-header");
-  const ridge = document.querySelector(".ridge");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SCROLL_WEIGHT = 2;
 
@@ -315,22 +314,10 @@
 
   function buildSectionState(ScrollTrigger) {
     const sections = [...document.querySelectorAll("[data-section-title]")];
-    const links = [...document.querySelectorAll("[data-section-link]")];
 
     function activate(section) {
-      const id = section.id;
       const onDark = section.dataset.theme === "dark";
-      links.forEach((link) => {
-        const active = link.dataset.sectionLink === id;
-        link.classList.toggle("is-active", active);
-        if (active) {
-          link.setAttribute("aria-current", "location");
-        } else {
-          link.removeAttribute("aria-current");
-        }
-      });
       header?.classList.toggle("on-dark", onDark);
-      ridge?.classList.toggle("on-dark", onDark);
     }
 
     sections.forEach((section) => {
